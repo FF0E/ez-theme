@@ -279,10 +279,10 @@ export const config = {
 
         // 客户端下载链接  //可以改成文档链接直接在新标签页打开
         clientLinks: {
-            ios: 'https://apps.apple.com/app/xxx',
-            android: 'https://play.google.com/store/apps/xxx',
-            macos: 'https://github.com/xxx/releases/latest',
-            windows: 'https://github.com/xxx/releases/latest',
+            ios: 'https://user.xrista.net/#/docs/4',
+            android: 'https://user.xrista.net/#/docs/3',
+            macos: 'https://user.xrista.net/#/docs/2',
+            windows: 'https://user.xrista.net/#/docs/1',
             linux: 'https://github.com/xxx/releases/latest',
             openwrt: 'https://github.com/xxx/releases/latest'
         },

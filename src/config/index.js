@@ -29,7 +29,9 @@ export const config  = {
         // 支持字符串形式(单个API地址)或数组形式(多个备选API地址)
         // 多个地址时，会按顺序检测可用性，并使用第一个可用的地址
         staticBaseUrl: [
-            'https://www.234981.xyz/api/v1'
+            'https://w5x8mu2a9943r.ezdemo.xyz/api/v1',
+            'https://skhsn6q4pnv95.ezdemo.xyz/api/v1',
+            'https://gy1v06omopzc8.ezdemo.xyz/api/v1'
         ],
       
         // 自动获取模式配置 (urlMode = 'auto'时使用)
@@ -47,7 +49,7 @@ export const config  = {
 
     // 是否启用中间件代理API请求
     // 设置为true时，所有API请求将通过中间件转发
-    API_MIDDLEWARE_ENABLED: false,
+    API_MIDDLEWARE_ENABLED: true,
   
     //=======================================================
     // 中间件服务器URL (不含路径) 开源地址 https://github.com/codeman857/EZ-Encrypt-Middleware
@@ -141,15 +143,14 @@ export const config  = {
     // 认证页面布局配置
     AUTH_LAYOUT_CONFIG: {
         // 布局类型: 'center' 为居中卡片布局, 'split' 为左右分栏布局
-        layoutType: 'split',
+        layoutType: 'center',
 
         // 左右分栏布局配置 (仅当 layoutType 为 'split' 时生效)
         splitLayout: {
             // 左侧区域内容配置
             leftContent: {
                 // 左侧背景图片URL或路径 (如不设置则不设置图片背景)
-                // https://www.loliapi.com/acg
-                backgroundImage: '',
+                backgroundImage: 'https://www.loliapi.com/acg',
 
                 // 左上角网站名称配置
                 siteName: {
@@ -176,7 +177,7 @@ export const config  = {
         showHotSaleBadge: false,
 
         // 是否显示套餐特性卡片 (true=显示, false=隐藏)
-        showPlanFeatureCards: flase, // 默认显示
+        showPlanFeatureCards: true, // 默认显示
 
         // 是否自动选择周期最大的标签，设为false则不会自动选择
         autoSelectMaxPeriod: false, // 默认关闭
@@ -276,7 +277,7 @@ export const config  = {
         showMacOS: true,
         showWindows: true,
         showLinux: true,
-        // showOpenWrt: true,
+        showOpenWrt: true,
 
         // 客户端下载链接  //可以改成文档链接直接在新标签页打开
         clientLinks: {
@@ -334,7 +335,7 @@ export const config  = {
     // 用户中心页面配置
     PROFILE_CONFIG: {
         // 是否显示礼品卡兑换栏目 (true=显示, false=隐藏)
-        showGiftCardRedeem: true, // 只有Xiao-V2board支持礼品卡兑换
+        showGiftCardRedeem: false, // 只有Xiao-V2board支持礼品卡兑换
 
         // 是否显示最近登录设备栏目 (true=显示, false=隐藏)
         showRecentDevices: true
@@ -357,7 +358,7 @@ export const config  = {
     // 验证码配置
     CAPTCHA_CONFIG: {
         // 验证方式: 'google' 或 'cloudflare'
-        captchaType: 'cloudflare',
+        captchaType: 'google',
 
         // Google reCAPTCHA 配置 默认v2版本
         google: {
@@ -388,7 +389,7 @@ export const config  = {
         // 格式: { "标头名称": "标头值" }
         // 例如: { "X-Custom-Header": "CustomValue" }
         headers: {
-            "2jy3r4cg": "r328k33des73er6r"
+            // "test": "test123"
         }
     },
 
@@ -516,7 +517,7 @@ export const config  = {
         daysToShow: 30, // 默认显示30天
 
         // 流量趋势图是否聚合每日流量 (如果你的节点倍率全为1倍则无需开启)
-        sumDailyTraffic: true // 默认禁用
+        sumDailyTraffic: false // 默认禁用
     },
 
     // 节点列表配置
@@ -584,7 +585,7 @@ export const config  = {
     // More页面自定义卡片配置
     MORE_PAGE_CONFIG: {
         // 是否启用自定义卡片功能
-        enableCustomCards: true,
+        enableCustomCards: false,
 
         // 自定义卡片列表
         // 说明:

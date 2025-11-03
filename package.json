@@ -20,7 +20,7 @@
     "@vueuse/core": "^13.0.0",
     "@vueuse/motion": "^2.0.0-beta.12",
     "aieditor": "^1.4.1",
-    "axios": "1.12.2",
+    "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "core-js": "^3.25.0",
     "crisp": "^1.0.0",
@@ -67,20 +67,5 @@
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1",
     "webpack-obfuscator": "^3.5.1"
-  },
-  "overrides": {
-    "axios": "1.12.2",
-    "minimist": "^1.2.8",
-    "min-document": "2.19.0",
-    "global": {
-      "min-document": "2.19.0"
-    },
-    "@vue/component-compiler-utils": {
-      "postcss": "^8.4.31"
-    },
-    "webpack-dev-server": "5.2.1",
-    "optimist": {
-      "minimist": "^1.2.8"
-    }
   }
 }

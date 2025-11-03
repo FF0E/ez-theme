@@ -148,7 +148,8 @@ export const config  = {
             // 左侧区域内容配置
             leftContent: {
                 // 左侧背景图片URL或路径 (如不设置则不设置图片背景)
-                backgroundImage: 'https://www.loliapi.com/acg',
+                // https://www.loliapi.com/acg
+                backgroundImage: '',
 
                 // 左上角网站名称配置
                 siteName: {
@@ -175,7 +176,7 @@ export const config  = {
         showHotSaleBadge: false,
 
         // 是否显示套餐特性卡片 (true=显示, false=隐藏)
-        showPlanFeatureCards: true, // 默认显示
+        showPlanFeatureCards: flase, // 默认显示
 
         // 是否自动选择周期最大的标签，设为false则不会自动选择
         autoSelectMaxPeriod: false, // 默认关闭
@@ -191,8 +192,8 @@ export const config  = {
 
         // 价格周期的显示顺序（从大到小）
         periodOrder: [
-            // 'three_year_price', // 三年
-            // 'two_year_price',   // 两年
+            'three_year_price', // 三年
+            'two_year_price',   // 两年
             'year_price',       // 一年
             'half_year_price',  // 半年
             'quarter_price',    // 季度

@@ -65,7 +65,7 @@ export const config = {
 
     // ====================  网站基础配置  ====================
     SITE_CONFIG: {
-        siteName: '推 推',
+        siteName: '推推',
         siteDescription: 'tuitui.me 推推我',
         // copyright会自动使用当前年份
         copyright: `© ${new Date().getFullYear()} EZ THEME. All Rights Reserved.`,
@@ -535,7 +535,7 @@ export const config = {
     // 客服系统配置
     CUSTOMER_SERVICE_CONFIG: {
         // 是否启用客服系统
-        enabled: true,
+        enabled: false,
 
         // 客服系统类型: 'crisp' 或 'other'
         // 注意：当客服类型为crisp时，系统会自动向Crisp传递用户数据

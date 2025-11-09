@@ -100,7 +100,7 @@ export const config = {
         defaultTheme: 'light',
 
         // 主题色 (16进制颜色值)
-        primaryColor: '#355cc2',
+        primaryColor: '#4556D3',
 
         // 是否启用落地页 (true=启用, false=禁用)
         enableLandingPage: false // 默认启用
@@ -517,7 +517,7 @@ export const config = {
         daysToShow: 30, // 默认显示30天
 
         // 流量趋势图是否聚合每日流量 (如果你的节点倍率全为1倍则无需开启)
-        sumDailyTraffic: false // 默认禁用
+        sumDailyTraffic: true // 默认禁用
     },
 
     // 节点列表配置
@@ -573,7 +573,7 @@ export const config = {
         // 可选值: 'invite', 'docs', 'tickets', 'nodes', 'orders', 'traffic', 'wallet', 'profile'
         // 'wallet' 只有 xiao-v2board 支持 非 xiao-v2board 面板请勿设置为 wallet
         // 默认值为 'invite'
-        thirdNavItem: 'invite',
+        thirdNavItem: 'trafficlog',
 
         // 可选：第四个导航项（插入在“更多”之前）。为空字符串或未设置则不插入
         // 可选值同上: 'invite', 'docs', 'tickets', 'nodes', 'orders', 'traffic', 'wallet', 'profile'

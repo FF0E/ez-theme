@@ -71,7 +71,7 @@ export const config = {
         copyright: `© ${new Date().getFullYear()} EZ THEME. All Rights Reserved.`,
 
         // 是否显示标题中的网站Logo (true=显示, false=隐藏)
-        showLogo: False,
+        showLogo: false,
 
         // Landing页面多语言标语
         landingText: {
@@ -103,7 +103,7 @@ export const config = {
         primaryColor: '#355cc2',
 
         // 是否启用落地页 (true=启用, false=禁用)
-        enableLandingPage: true // 默认启用
+        enableLandingPage: false // 默认启用
     },
 
     // 认证页面功能配置

@@ -293,41 +293,41 @@ export const config = {
 
         // iOS平台
         showShadowrocket: true,
-        showSurge: true,
-        showStash: true,
+        showSurge: false,
+        showStash: false,
         showQuantumultX: true,
-        showHiddifyIOS: true,
-        showSingboxIOS: true,
-        showLoon: true,
+        showHiddifyIOS: false,
+        showSingboxIOS: false,
+        showLoon: false,
 
         // Android平台客户端
         showFlClashAndroid: true,
         showV2rayNG: true,
         showClashAndroid: true,
-        showSurfboard: true,
+        showSurfboard: false,
         showClashMetaAndroid: true,
-        showNekobox: true,
-        showSingboxAndroid: true,
-        showHiddifyAndroid: true,
+        showNekobox: false,
+        showSingboxAndroid: false,
+        showHiddifyAndroid: false,
 
         // Windows平台客户端
         showFlClashWindows: true,
         showClashVergeWindows: true,
         showClashWindows: true,
-        showNekoray: true,
-        showSingboxWindows: true,
-        showHiddifyWindows: true,
+        showNekoray: false,
+        showSingboxWindows: false,
+        showHiddifyWindows: false,
 
         // MacOS平台客户端
         showFlClashMac: true,
         showClashVergeMac: true,
-        showClashX: true,
+        showClashX: false,
         showClashMetaX: true,
-        showSurgeMac: true,
-        showStashMac: true,
+        showSurgeMac: false,
+        showStashMac: false,
         showQuantumultXMac: true,
-        showSingboxMac: true,
-        showHiddifyMac: true
+        showSingboxMac: false,
+        showHiddifyMac: false
     },
 
     // ================ Xiao 版本的配置 =======================

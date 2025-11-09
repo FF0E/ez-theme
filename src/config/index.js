@@ -224,7 +224,7 @@ export const config = {
         confirmOrder: true,
         // 下单前二次确认内容
         // confirmOrderContent: "<p><strong style='color: red'>无法提供相关教程和使用说明。</strong></p><p><strong style='color: red'>不会使用请勿购买，没有退款政策</strong></p>",
-        confirmOrderContent: "请查看文档获取使用帮助",
+        confirmOrderContent: "<p><strong style='color: red'>因收款商限制，购买后我们无法为您提供原路返回的退款服务。</strong></p><p><strong style='color: red'>当月未用完的流量不结转至下月，将在下个月购买日清零。</strong></p><p><strong style='color: red'>一次性套餐的流量无到期日，用完即止；重复购买一次性套餐，流量不会叠加，只会重置为新购的流量。</strong></p><p><strong style='color: red'>当您的套餐流量用尽时，续费不会立即重置；如不想等待至重置日，可购买流量重置包或升级套餐以获得一次立即重置。</strong></p><p><strong style='color: red'>有其他任何疑问欢迎咨询我们的在线客服❤️</strong></p>",
 
     },
     // 仪表盘页面配置

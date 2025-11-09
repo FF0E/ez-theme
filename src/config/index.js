@@ -231,7 +231,7 @@ export const config = {
         showUserEmail: false,
 
         // 是否为导入订阅按钮添加高光效果和填充底色 (true=添加效果, false=不添加效果)
-        importButtonHighlightBtnbgcolor: false,
+        importButtonHighlightBtnbgcolor: true,
 
         // ===============================
 
@@ -267,7 +267,7 @@ export const config = {
     // 客户端下载配置
     CLIENT_CONFIG: {
         // 整个下载卡片显示控制
-        showDownloadCard: true,
+        showDownloadCard: false,
 
         // 平台显示控制 (true=显示, false=隐藏)
         showIOS: true,
@@ -333,7 +333,7 @@ export const config = {
     // 用户中心页面配置
     PROFILE_CONFIG: {
         // 是否显示礼品卡兑换栏目 (true=显示, false=隐藏)
-        showGiftCardRedeem: false, // 只有Xiao-V2board支持礼品卡兑换
+        showGiftCardRedeem: true, // 只有Xiao-V2board支持礼品卡兑换
 
         // 是否显示最近登录设备栏目 (true=显示, false=隐藏)
         showRecentDevices: true

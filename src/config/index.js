@@ -18,6 +18,7 @@ export const config = {
     // 可使用以下选项来配置API基础URL:
     // 1. 静态URL: 直接指定API基础URL 末尾要加 /api/v1 !!!!!!!!!!!!!!! 除非你自己改过路由要不然别不加
     // 2. 自动获取: 从当前域名自动生成API基础URL
+    
     API_CONFIG: {
         // API URL获取方式: 'static'=使用静态URL, 'auto'=自动从当前域名获取
         urlMode: 'static',

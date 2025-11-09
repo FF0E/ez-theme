@@ -103,7 +103,7 @@ export const config = {
         primaryColor: '#355cc2',
 
         // 是否启用落地页 (true=启用, false=禁用)
-        enableLandingPage: true // 默认启用
+        enableLandingPage: false // 默认启用
     },
 
     // 认证页面功能配置

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verifying...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #050816;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wrap {
+      text-align: center;
+    }
+
+    .spinner {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: #ffffff;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    .text-main {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .text-sub {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .error {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #f97373;
+      display: none;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="spinner"></div>
+    <div class="text-main">Checking your browser...</div>
+    <div class="text-sub">Page will return few sec...</div>
+    <div class="error" id="errorText">
+      Cookie Error，please check if you blocked Cookie。
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const COOKIE_NAME = "verify";
+      const COOKIE_VALUE = "58q6qvyrcufy4nr5";
+      const COOKIE_DAYS = 7;
+
+      function setCookie(name, value, days) {
+        const maxAge = days * 24 * 60 * 60; // 秒
+        // path=/ 保证整个站都能带上
+        document.cookie =
+          name +
+          "=" +
+          encodeURIComponent(value) +
+          "; Max-Age=" +
+          maxAge +
+          "; Path=/; SameSite=Lax";
+      }
+
+      function hasCookie(name, expectedValue) {
+        const cookies = document.cookie ? document.cookie.split(";") : [];
+        for (let c of cookies) {
+          const [k, v] = c.trim().split("=");
+          if (k === name) {
+            if (expectedValue === undefined) return true;
+            return decodeURIComponent(v || "") === expectedValue;
+          }
+        }
+        return false;
+      }
+
+      function goBackToOriginal() {
+        // 原始访问是 https://example.com/#/register?code=xxx
+        // CDN 跳成 https://example.com/verify/#/register?code=xxx
+        // 这里用当前 hash 拼一个新的不带 /verify 的地址
+        var hash = window.location.hash || "#/";
+        var target = window.location.origin + "/" + hash; // => https://example.com/#/...
+
+        // 用 replace 避免多一条历史记录
+        window.location.replace(target);
+      }
+
+      function showError() {
+        var el = document.getElementById("errorText");
+        if (el) el.style.display = "block";
+      }
+
+      // 主流程
+      (function main() {
+        // 1. 如果已经有 cookie 了，直接回跳
+        if (hasCookie(COOKIE_NAME, COOKIE_VALUE)) {
+          goBackToOriginal();
+          return;
+        }
+
+        // 2. 没有就先写一个 7 天的
+        setCookie(COOKIE_NAME, COOKIE_VALUE, COOKIE_DAYS);
+
+        // 3. 稍微等一下再读一遍，确认写入成功
+        setTimeout(function () {
+          if (hasCookie(COOKIE_NAME, COOKIE_VALUE)) {
+            goBackToOriginal();
+          } else {
+            // Cookie 写不进去就别死循环了，给个提示
+            showError();
+          }
+        }, 300);
+      })();
+    })();
+  </script>
+</body>
+</html>

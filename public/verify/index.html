@@ -74,8 +74,6 @@
     const COOKIE_VALUE = "58q6qvyrcufy4nr5";
     const COOKIE_DAYS = 7;
 
-    // ✅ 等待 cookie 写入后再检查的延迟（保持原来的 300ms 就行）
-    const CHECK_DELAY = 1000;
 
     // ✅ 重试刷新浏览器前等待 1 秒
     const REFRESH_DELAY = 1000;
@@ -120,8 +118,10 @@
     (function main() {
       // 已经有 cookie 直接回去
       if (hasCookie(COOKIE_NAME, COOKIE_VALUE)) {
-        goBackToOriginal();
-        return;
+        setTimeout(function () {
+          goBackToOriginal();
+          return;
+          }, REFRESH_DELAY);
       }
 
       // 没有就写一个
@@ -140,7 +140,7 @@
             window.location.reload();
           }, REFRESH_DELAY); // ⭐ 这里就是你要的“重试刷新等 1 秒”
         }
-      }, CHECK_DELAY);
+      }, REFRESH_DELAY);
     })();
   })();
 </script>

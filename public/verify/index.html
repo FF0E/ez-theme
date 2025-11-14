@@ -69,73 +69,81 @@
   </div>
 
   <script>
-    (function () {
-      const COOKIE_NAME = "verify";
-      const COOKIE_VALUE = "58q6qvyrcufy4nr5";
-      const COOKIE_DAYS = 7;
+  (function () {
+    const COOKIE_NAME = "verify";
+    const COOKIE_VALUE = "58q6qvyrcufy4nr5";
+    const COOKIE_DAYS = 7;
 
-      function setCookie(name, value, days) {
-        const maxAge = days * 24 * 60 * 60; // 秒
-        // path=/ 保证整个站都能带上
-        document.cookie =
-          name +
-          "=" +
-          encodeURIComponent(value) +
-          "; Max-Age=" +
-          maxAge +
-          "; Path=/; SameSite=Lax";
-      }
+    // ✅ 等待 cookie 写入后再检查的延迟（保持原来的 300ms 就行）
+    const CHECK_DELAY = 1000;
 
-      function hasCookie(name, expectedValue) {
-        const cookies = document.cookie ? document.cookie.split(";") : [];
-        for (let c of cookies) {
-          const [k, v] = c.trim().split("=");
-          if (k === name) {
-            if (expectedValue === undefined) return true;
-            return decodeURIComponent(v || "") === expectedValue;
-          }
+    // ✅ 重试刷新浏览器前等待 1 秒
+    const REFRESH_DELAY = 1000;
+
+    function setCookie(name, value, days) {
+      const maxAge = days * 24 * 60 * 60; // 秒
+      document.cookie =
+        name +
+        "=" +
+        encodeURIComponent(value) +
+        "; Max-Age=" +
+        maxAge +
+        "; Path=/; SameSite=Lax";
+    }
+
+    function hasCookie(name, expectedValue) {
+      const cookies = document.cookie ? document.cookie.split(";") : [];
+      for (let c of cookies) {
+        const [k, v] = c.trim().split("=");
+        if (k === name) {
+          if (expectedValue === undefined) return true;
+          return decodeURIComponent(v || "") === expectedValue;
         }
-        return false;
+      }
+      return false;
+    }
+
+    function goBackToOriginal() {
+      var hash = window.location.hash || "#/";
+      var target = window.location.origin + "/" + hash;
+      window.location.replace(target);
+    }
+
+    function showError(msg) {
+      var el = document.getElementById("errorText");
+      if (el) {
+        el.style.display = "block";
+        if (msg) el.textContent = msg;
+      }
+    }
+
+    (function main() {
+      // 已经有 cookie 直接回去
+      if (hasCookie(COOKIE_NAME, COOKIE_VALUE)) {
+        goBackToOriginal();
+        return;
       }
 
-      function goBackToOriginal() {
-        // 原始访问是 https://example.com/#/register?code=xxx
-        // CDN 跳成 https://example.com/verify/#/register?code=xxx
-        // 这里用当前 hash 拼一个新的不带 /verify 的地址
-        var hash = window.location.hash || "#/";
-        var target = window.location.origin + "/" + hash; // => https://example.com/#/...
+      // 没有就写一个
+      setCookie(COOKIE_NAME, COOKIE_VALUE, COOKIE_DAYS);
 
-        // 用 replace 避免多一条历史记录
-        window.location.replace(target);
-      }
-
-      function showError() {
-        var el = document.getElementById("errorText");
-        if (el) el.style.display = "block";
-      }
-
-      // 主流程
-      (function main() {
-        // 1. 如果已经有 cookie 了，直接回跳
+      // 等一会儿再检查
+      setTimeout(function () {
         if (hasCookie(COOKIE_NAME, COOKIE_VALUE)) {
+          // 正常 -> 回原页面
           goBackToOriginal();
-          return;
+        } else {
+          // ❌ 写失败：先提示，再 1s 后刷新浏览器重试
+          showError("Cookie 写入失败，1 秒后自动重试…");
+
+          setTimeout(function () {
+            window.location.reload();
+          }, REFRESH_DELAY); // ⭐ 这里就是你要的“重试刷新等 1 秒”
         }
-
-        // 2. 没有就先写一个 7 天的
-        setCookie(COOKIE_NAME, COOKIE_VALUE, COOKIE_DAYS);
-
-        // 3. 稍微等一下再读一遍，确认写入成功
-        setTimeout(function () {
-          if (hasCookie(COOKIE_NAME, COOKIE_VALUE)) {
-            goBackToOriginal();
-          } else {
-            // Cookie 写不进去就别死循环了，给个提示
-            showError();
-          }
-        }, 300);
-      })();
+      }, CHECK_DELAY);
     })();
-  </script>
+  })();
+</script>
+
 </body>
 </html>

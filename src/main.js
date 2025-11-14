@@ -8,8 +8,11 @@
   // 对应你 Cloudflare 里的逻辑：
   // starts_with(http.request.full_uri, "https://user.")
   // and not http.referer contains "https://www.")
-  if (href.indexOf('https://user.') === 0 && ref.indexOf('https://www.') === -1) {
+  const needRedirect =
+    href.indexOf('https://user.') === 0 &&
+    ref.indexOf('https://www.') === -1;
 
+  if (needRedirect) {
     // 干掉 user. 前缀，拿 root 域名
     let rootHost = host;
     if (host.indexOf('user.') === 0) {
@@ -26,12 +29,14 @@
       window.location.search +
       window.location.hash;
 
+    // 标记：已经触发“301”逻辑，后面的 JS 直接别跑了
+    if (typeof window !== 'undefined') {
+      window.__EZ_REDIRECTING__ = true;
+    }
+
     window.location.replace(target);
   }
 })();
-
-
-
 
 import disableDevtool from "disable-devtool";
 
@@ -41,6 +46,11 @@ const enableAntiDebugging = process.env.VUE_APP_DEBUGGING == "true";
 
 (async () => {
   try {
+    // 如果上面触发了跳转，这里直接溜，不执行后续逻辑
+    if (typeof window !== 'undefined' && window.__EZ_REDIRECTING__) {
+      return;
+    }
+
     if (!isProd || !enableConfigJS) {
       const res = await import('./config/index.js');
       if (typeof window !== 'undefined') {
@@ -50,7 +60,7 @@ const enableAntiDebugging = process.env.VUE_APP_DEBUGGING == "true";
     
     // 反调试逻辑
     if (isProd && enableAntiDebugging) {
-      disableDevtool()
+      disableDevtool();
     }
     
     // ⚠️ 确保在 config 加载后再初始化应用
@@ -59,4 +69,3 @@ const enableAntiDebugging = process.env.VUE_APP_DEBUGGING == "true";
     console.error(error);
   }
 })();
-
